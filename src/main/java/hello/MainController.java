@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 public class MainController {
     private static final DateFormat dfDate = new SimpleDateFormat("dd MMM yyyy");
@@ -28,5 +30,10 @@ public class MainController {
         return new CurrentDate(
                 dfDate.format(date),
                 dfTime.format(date));
+    }
+
+    @RequestMapping("/**")
+    public EchoEntry echo(HttpServletRequest request) {
+        return new EchoEntry(request);
     }
 }
